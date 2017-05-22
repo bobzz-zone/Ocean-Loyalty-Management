@@ -39,6 +39,11 @@ def get_data():
 					"name": "Cash Coupon Tool",
 					"description": _("Create coupons in bulk"),
 				},
+				{
+					"type":"doctype",
+					"name":"Adjust Point Value",
+					"description":_("Adjust Point Value")
+				}
 			]
 		},
                 {
