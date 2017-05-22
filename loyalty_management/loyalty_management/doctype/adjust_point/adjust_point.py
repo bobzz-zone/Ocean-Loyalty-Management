@@ -46,12 +46,21 @@ class AdjustPoint(Document):
 		current_point = customer.total_point
 		point_after_reduce = 0
 		
+			
 		point_after_reduce = current_point - self.claim_point
 		customer.update({
 			"total_point": point_after_reduce	
 		})
 		customer.flags.ignore_permissions = 1
 		customer.save()
+
+		logg=frappe.new_doc("Customer Point Log")
+		logg.customer=self.customer
+		logg.point=self.claim_point * -1
+		logg.balance_after = point_after_reduce
+		logg.reference_doc = "Adjust Point"
+		logg.reference = self.name
+		logg.save()
 
 	def add_point_to_customer(self):
 		customer = frappe.get_doc("Customer",self.customer)
@@ -64,6 +73,13 @@ class AdjustPoint(Document):
 		})
 		customer.flags.ignore_permissions = 1
 		customer.save()
+		logg=frappe.new_doc("Customer Point Log")
+		logg.customer=self.customer
+		logg.point=self.claim_point
+		logg.balance_after = point_after_reduce
+		logg.reference_doc = "Adjust Point"
+		logg.reference = self.name
+		logg.save()
 
 		
 
