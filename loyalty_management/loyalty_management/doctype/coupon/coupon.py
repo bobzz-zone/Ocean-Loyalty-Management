@@ -8,6 +8,7 @@ from frappe.model.document import Document
 
 class Coupon(Document):
 	def on_submit(self):
+		return
 		# cost_center = frappe.db.get_value("Company", ref_doc.company, "cost_center")
 		if self.date_of_issue and self.company and self.is_bulk==0:
 			company_abbr = frappe.db.get_value("Company", self.company, "abbr")
